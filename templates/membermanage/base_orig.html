@@ -1,0 +1,104 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html>
+<head>
+  <meta http-equiv="CONTENT-TYPE" content="text/html; charset=us-ascii">
+  <title>{% block title %}Fido Membership Matters{% endblock %}</title>
+  <style type="text/css">
+      <!--
+                @page  { size: landscape; margin: 0.25in }
+                p      { font-family:Helvetica,Arial,sans;font-size:normal;font-style:normal;margin-bottom: 0.08in }
+                span.title {font-family:Helvetica,Arial,sans;font-size:x-large;font-style:normal;font-weight:bold;align:left;vertical-align:bottom;color:white }
+                table  { font-size: small}
+                td.aok { border-top: 1px solid #999999; border-bottom: 1px solid #999999; border-left: 1px solid #999999; border-right: 1px solid #999999;background-color:#d0ffd0;font-family:Helvetica,Arial,sans;font-size:small;font-style:italic;padding:3 }
+                td.exn { border-top: 1px solid #999999; border-bottom: 1px solid #999999; border-left: 1px solid #999999; border-right: 1px solid #999999;background-color:#fffb80;font-family:Helvetica,Arial,sans;font-size:small;font-style:italic;padding:3 }
+                td.exp { border-top: 1px solid #999999; border-bottom: 1px solid #999999; border-left: 1px solid #999999; border-right: 1px solid #999999;background-color:#ffd080;font-family:Helvetica,Arial,sans;font-size:small;font-style:italic;padding:3 }
+                td.fpr { border-top: 1px solid #999999; border-bottom: 1px solid #999999; border-left: 1px solid #999999; border-right: 1px solid #999999;background-color:#d0ffd0;font-family:Helvetica,Arial,sans;font-size:x-small;font-style:normal;padding:3 }
+                td.inf { border-top: 1px solid #999999; border-bottom: 1px solid #999999; border-left: 1px solid #999999; border-right: 1px solid #999999;background-color:#d0d0d0;font-family:Helvetica,Arial,sans;font-size:small;font-style:italic;padding:3 }
+                td.trn { border-top: 1px solid #999999; border-bottom: 1px solid #999999; border-left: 1px solid #999999; border-right: 1px solid #999999;background-color:#d0ffd0;font-family:Helvetica,Arial,sans;font-size:small;font-style:italic;padding:3;opacity:0.6;filter:alpha(opacity=60,style=0) }
+                td.err { border-top: 1px solid #ff8080; border-bottom: 1px solid #ff8080; border-left: 1px solid #ff8080; border-right: 1px solid #ff8080;background-color:#ffd0d0;font-family:Helvetica,Arial,sans;font-size:small;font-style:italic;padding:3 }
+                td.hdr { border-top: 1px solid #999999; border-bottom: 1px solid #999999; border-left: 1px solid #999999; border-right: 1px solid #999999;background-color:#104090;font-family:Helvetica,Arial,sans;font-size:small;font-weight:bold;color:white;padding:3 }
+                td.hdrfpr { border-top: 1px solid #999999; border-bottom: 1px solid #999999; border-left: 1px solid #999999; border-right: 1px solid #999999;background-color:#104090;font-family:Helvetica,Arial,sans;font-size:x-small;font-weight:normal;color:white;padding:3 }
+                td.bnr {}
+        -->
+  </style>
+</head>
+<body style="background-color:#e0e5df">
+  <div style="position:absolute;left:0;top:0;z-index:0">
+    <img src="/sitemedia/banner.png" name="ciaobellabanner" align="left" width="1054" height="203" border="0" id="ciaobellabanner">
+  </div>
+  <div style="position:absolute;left:0;top:40;z-index:1">
+  <table cols="2" rules="None">
+    <colgroup>
+       <col width="320">
+       <col width="740">
+    </colgroup>
+    <tr>
+      <td class="bnr">
+        <img src="/sitemedia/fidologo.png" name="fidologo" align="left" width="236" height="131" border="0" id="fidologo">
+      </td>
+      <td class="bnr">
+         {% block pagetitle %}
+         <span class="title">Membership Matters</span>
+         {% endblock %}
+         <div>
+            <table id='outernav' col="3" border="0">
+               <tr>
+                  <td valign="top">
+                     <form action="/member/directory/" method="POST">
+                        <table id='lookitup' col="2" rules="NONE" border="0">
+                           <tr>
+                              <td>
+                                 {{lookup.lu_search.errors}}
+                              </td>
+                              <td>
+                                 &nbsp;
+                              </td>
+                           </tr>
+                           <tr>
+                              <td class="trn" title="{{lookup.search.help_text}}" valign="top">
+                                 {{lookup.lu_search.label_tag}}
+                                 <div class="aok">{{lookup.lu_search}}</div>
+                              </td>
+                              <td class="trn" valign="top">
+                                 <input type="submit" value="Find"> 
+                              </td> 
+                           </tr>
+                        </table>
+                     </form>
+                  </td>
+                  <td valign="top">
+                     <form action="/member/detail/new/" method="GET">
+                        <table id='newmember' col="1" rules="NONE" border="0">
+                           <tr>
+                              <td>
+                                 &nbsp;
+                              </td>
+                           </tr>
+                           <tr>
+                              <td class="trn" title="Enter a New Member" valign="top">
+                                 <div class="aok">
+                                    <input type="submit" value="New Member">
+                                 </div>
+                              </td>
+                           </tr>
+                        </table>
+                     </form>
+                  </td>
+                  <td>
+                     &nbsp;
+                  </td>
+               </tr>
+            </table>
+         </div>
+      </td> 
+    </tr>
+  </table>
+  </div>
+  <div style="position:absolute;left:0;top:210;z-index:1">
+     {% block content %}
+        {{content_text}}
+     {% endblock %}
+  </div>
+</body>
+</html>

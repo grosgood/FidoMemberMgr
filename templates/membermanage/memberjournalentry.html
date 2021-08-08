@@ -1,0 +1,73 @@
+{% extends "membermanage/smallbase.html" %}
+{% block content %}
+<form action= "{% url 'fidoonline.membermanage.memberactions.addjournalrecord' member.memberid %}" method="POST">{% csrf_token %}
+  <table col="2" rules="NONE" border="0">
+    <colgroup>
+      <col width=120>
+      <col width=180>
+      <col width=120
+    </colgroup>
+    <tbody>
+      <tr>
+        <td class="nut" title="{{field.help_text}}">
+        {{jform.jf_subject.label}}
+        </td>
+        <td>
+        {{jform.jf_subject}}
+        </td>
+        <td>
+        {% if jform.jf_subject.errors %}
+          <ul>
+          {% for err in jform.jf_subject.errors %}
+            <li class="smallwarn">{{err}}</li>
+           {% endfor %}
+          </ul>
+         {% else %}
+           &nbsp;
+         {% endif %}
+        </td>
+      </tr>
+      <tr>
+        <td class="nut" title="{{field.help_text}}">
+        {{jform.jf_comment.label}}
+        </td>
+        <td>
+        {{jform.jf_comment}}
+        </td>
+        <td>
+        {% if jform.jf_comment.errors %}
+          <ul>
+          {% for err in jform.jf_comment.errors %}
+            <li class="smallwarn">{{err}}</li>
+           {% endfor %}
+          </ul>
+         {% else %}
+           &nbsp;
+         {% endif %}
+        </td>
+      </tr>
+      <tr>
+        <td class="inf" title="Withdraw changes" align="RIGHT">
+          <input type="submit" name="CancelButton" value="Cancel"> 
+        </td> 
+        <td class="inf" title="Commit changes" align="RIGHT">
+          <input type="submit" name="UpdateButton" value="Update"> 
+        </td> 
+      </tr>
+      <tr>
+      {% autoescape off %}
+        <td colspan="2">
+           {% if member.jform.non_field_errors %}
+              <ul>
+              {% for err in member.jform.non_field_errors %} 
+	         <li class="warn">{{err}}</li>
+              {% endfor %}
+              </li>
+           {% endif %}
+        </td> 
+      {% endautoescape %}
+      </tr>
+    </tbody>
+  </table>
+</form>
+{% endblock %}

@@ -1,0 +1,9 @@
+{% extends "membermanage/smallbase.html" %}
+{% block scriptlist %}
+   {% for scripturl in scriptlist %}
+      <script type="text/javascript" language="javascript" src="{{scripturl}}"></script>
+   {% endfor %}
+{% endblock %}
+{% block content %}
+{% include "membermanage/memberpick.html" %}
+{% endblock %}

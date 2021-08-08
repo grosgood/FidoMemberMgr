@@ -1,0 +1,80 @@
+{% extends "membermanage/base.html" %}
+
+{% block title %}
+   {{window_title}}
+{% endblock %}
+
+{% block pagetitle %}
+   <span class="title">{{page_title}}</span>
+{% endblock %}
+{% block createdevice %}
+   &nbsp; <!-- Create pets with members, not on their own -->
+{% endblock %}
+
+{% block content %}
+  {% if pet_names and table_headers %}
+    <table cols="4" rules="NONE" border="0">
+      <colgroup>
+      {% for hdr in table_headers %}
+        <col width="{{hdr.width}}">
+      {% endfor %} 
+      </colgroup>
+      <tr>
+      {% for hdr in table_headers %}
+        <td class="hdr">{{hdr.name}}</td>
+      {% endfor %}
+      </tr> 
+    </table>
+    <div style="height:500;width:1100;overflow:auto">
+    <table col="4" rules="NONE" border="0">
+      <colgroup>
+      {% for hdr in table_headers %}
+        <col width={{hdr.width}}>
+      {% endfor %} 
+      </colgroup>
+      {% for pet in pet_names %}
+      <tr>
+        <td class="aok">{{pet.identifier}}</td>
+        <td class="aok"><a title='Edit {{pet.name}} ({{pet.identifier}})' href={% url "fidoonline.membermanage.petviews.detailonepet" pet.identifier %}>{{pet.name}}</a></td>
+        {% if pet.description.err %}
+            <td class="err">&mdash;</td>
+        {% else %} 
+            <td class="aok">{{pet.description.text}}</td>
+        {% endif %}
+        {% if pet.dogtag.err %}
+            <td class="err">&mdash;</td>
+        {% else %} 
+            <td class="aok">{{pet.dogtag.number}}</td>
+        {% endif %}
+       </tr>
+       <tr>
+        {% if pet.member.err %}
+            <td colspan="4" class="err">&mdash;</td>
+        {% else %} 
+            <td colspan="4" class="nut">
+               <table col="3" rules="NONE" border="0">
+                  {% for owner in pet.member.owners %}
+                  <tr>
+                     <td class="nob">&bull;</td>
+                     <td class="nob"><a title='Edit {{owner.name}} ({{owner.identifier}})' href={% url "fidoonline.membermanage.memberviews.detailmemberframeset" owner.identifier %}>{{owner.name}}</a></td>
+                     {% if owner.telephone.err %}
+                     <td class="now">No telephone</td>
+                     {% else %}   
+                     <td class="nob">{{owner.telephone.number}}</td>
+                     {% endif %}
+                     {% if owner.email.err %}
+                     <td class="now">No email</td>
+                     {% else %}
+                     <td class="nob"><a href=mailto:{{owner.email.address}}>{{owner.email.address}}</a></td>
+                     {% endif %}   
+                  </tr> 
+                  {% endfor %}
+               </table>  
+            </td>
+        {% endif %}
+      </tr>
+      {% endfor %}
+    </table>
+   </div> 
+  {% endif%}
+{% endblock %}

@@ -1,0 +1,36 @@
+{% extends "membermanage/base.html" %}
+{% load breadcrumb_url breadcrumb from breadcrumbs %}
+{% block content %}
+    <div id="outermost" style="position:absolute;left:4;top:0;z-index:1">
+      <div style="position:absolute;width:521px;height:160px;left:0px;top:0px;z-index:1;background-color:#F0F0FF;">
+        <iframe id="nw" name="nwslot" src="{{slots.northwestsloturl}}" frameborder="0"  height="160" width="521" scrolling="auto">
+          <p>Please enable inline frames in your browser preferences.</p>
+        </iframe>
+      </div>
+      <div style="position:absolute;width:521px;height:160px;left:524px;top:0px;z-index:1;background-color:#F0F0FF;">
+        <iframe id="ne" name="neslot" src="{{slots.northeastsloturl}}" frameborder="0" height="160" width="521" scrolling="auto">
+          <p>Please enable inline frames in your browser preferences.</p>
+        </iframe>
+      </div>
+      <div style="position:absolute;width:521px;height:320px;left:0px;top:164px;z-index:1;background-color:#F0F0FF;">
+        <iframe id="sw" name="swslot" src="{{slots.southwestsloturl}}" frameborder="0" height="320" width="521" scrolling="auto">
+          <p>Please enable inline frames in your browser preferences.</p>
+        </iframe>
+      </div>
+      <div style="position:absolute;width:521px;height:320px;left:524px;top:164px;z-index:1;background-color:#F0F0FF;">
+        <iframe id="se" name="seslot" src="{{slots.southeastsloturl}}" frameborder="0" height="320" width="521" scrolling="auto">
+          <p>Please enable inline frames in your browser preferences.</p>
+        </iframe>
+      </div>
+      <div style="position:absolute;width:521px;height:160px;left:0px;top:488px;z-index:1;background-color:#F0F0FF;">
+        <iframe id="south" name="southslot" src="{{slots.southsloturl}}" frameborder="0" height="160" width="521" scrolling="auto">
+          <p>Please enable inline frames in your browser preferences.</p>
+        </iframe>
+      </div>
+      <div style="position:absolute;width:521px;height:160px;left:524px;top:488px;z-index:1;background-color:#F0F0FF;">
+        <iframe id="search" name="searchslot" src="{{slots.searchsloturl}}" frameborder="0" height="160" width="521" scrolling="auto">
+          <p>Please enable inline frames in your browser preferences.</p>
+        </iframe>
+      </div>
+    </div>
+{% endblock %}

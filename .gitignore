@@ -3,6 +3,12 @@ __pycache__/
 *.py[cod]
 *$py.class
 
+# Libre Office based documentation
+odtdoc/
+
+# Scratch reporting file
+membermanage/reporting/
+
 # C extensions
 *.so
 

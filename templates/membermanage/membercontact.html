@@ -1,0 +1,74 @@
+{% extends "membermanage/smallbase.html" %}
+{% block content %}
+<table id="contact" title="Member Contact Table" cellspacing="1" cols="4" rules="NONE" border="0" summary="Name and contact information">
+  <colgroup>
+    <col width=81 />
+    <col width=180 />
+    <col width=81 />
+    <col width=180 />
+  </colgroup>
+  <tbody>
+    <tr>
+      <td class="{{member.statusstyle}}" colspan=2 style="font-size:large">
+        {{member.id}}<br />
+        {{member.fullname}}
+      </td>
+      <td class="nut" colspan=2>
+        {% if member.street %}
+           {{member.street.business}}<br />
+           {{member.street.location}}<br />
+           {{member.street.citystatezip}}<br />
+        {% else %}
+           (No U. S. Mail address)<br />
+        {% endif %}
+      </td>
+    </tr>
+    {% if member.statusstyle != 'inf' %}
+    <tr>
+      <td class="nob">&nbsp;</td>
+      <td class="inf" style="text-align:right">
+        <form action="{% url 'fidoonline.membermanage.memberactions.requestchangename' member.id %}" method="POST" target="nwslot">{% csrf_token %}
+          <input type="SUBMIT" name="ChangeNameButton" value="Change Name">
+        </form>
+      </td>
+      <td class="nob">&nbsp;</td>
+      <td class="inf" style="text-align:right">
+        <form action="{% url 'fidoonline.membermanage.memberactions.requestchangeaddress' member.id %}" method="POST" target="nwslot">{% csrf_token %}
+          <input type="SUBMIT" name="ChangeMailButton" value="Change Mail Address">
+        </form>
+      </td>
+    </tr>
+    <tr>
+      <td class="nut" colspan=2>
+        {% if member.email and member.email != 'None' %}
+        <a href="mailto:{{member.email}}">{{member.email}}</a>
+        {% else %}
+        (No E-Mail address)
+        {% endif %}  
+      </td>
+      <td class="nut" colspan=2>
+        {% if member.telephone and member.telephone != 'None' %}
+        {{member.telephone}}
+        {% else %}
+        (No telephone)
+        {% endif %} 
+      </td>
+    </tr>
+    <tr>
+      <td class="nob">&nbsp;</td>
+      <td class="inf" style="text-align:right">
+        <form action="{% url 'fidoonline.membermanage.memberactions.requestchangeemail' member.id %}" method="POST" target="nwslot">{% csrf_token %}
+          <input type="SUBMIT" name="ChangeEMailButton" value="Change EMail">
+        </form>
+      </td>
+      <td class="nob">&nbsp;</td>
+      <td class="inf" style="text-align:right">
+        <form action="{% url 'fidoonline.membermanage.memberactions.requestchangephone' member.id %}" method="POST" target="nwslot">{% csrf_token %}
+          <input type="SUBMIT" name="ChangePhoneButton" value="Change Phone">
+        </form>
+      </td>
+    </tr>
+    {% endif %}
+  </tbody>
+</table>
+{% endblock %}

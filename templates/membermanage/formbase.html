@@ -1,0 +1,302 @@
+{% extends "membermanage/base.html" %}
+
+{% block title %}
+   {{window_title}}
+{% endblock %}
+
+{% block pagetitle %}
+   <span class="title">{{page_title}}</span>
+{% endblock %}
+
+{% block content %}
+  <div>
+    <form action="/member/detail/{{member_id}}" method="POST">
+      <table col="3" rules="NONE" border="0">
+        <tr>
+          <td class="inf" valign="top">
+            <!-- Row 1, Col 1 -->
+            <p>Member</p> 
+            <table col="2" rules="NONE" border="0">
+            {% for field in member_form %}
+              <tr>
+                <td class="aok" title="{{field.help_text}}">
+                   {{field.label}}
+                </td>
+                <td>
+                   {{field}}
+                </td>
+              </tr>
+            {% endfor %}
+            </table>
+          </td>
+          <td class="inf" valign="top" rowspan="2">
+            <!-- Row 1, Col 2, Row 2, Col 2 -->
+            <p>US Mail Address</p>
+            <table col="2" rules="NONE" border="0">
+            {% for field in address_form %}
+              <tr>
+                <td class="aok" title="{{field.help_text}}">
+                   {{field.label}}
+                </td>
+                <td>
+                   {{field}}
+                </td>
+              </tr>
+            {% endfor %}
+            </table>
+          </td>
+          <td class="inf" valign="top" rowspan="2">
+            <!-- Row 1, Col 3, Row 2, Col 3 -->
+           <p>Journal</p>
+           {% if j_entries %}
+             <table col="3" rules="NONE" border="0">
+               <colgroup>
+                 <col width=70 />
+                 <col width=50 />
+                 <col width=270 /> 
+               </colgroup>
+               <tr>
+                 <td class="hdrfpr">Date</td> 
+                 <td class="hdrfpr">Subject</td> 
+                 <td class="hdrfpr">Comment</td>
+               </tr>
+             </table>
+             <div style="height:120;width:430;overflow:auto">
+               <table col="3" rules="NONE" border="0">
+                 <colgroup>
+                   <col width=70 />
+                   <col width=50 />
+                   <col width=270 /> 
+                 </colgroup>
+                 {% for je in j_entries %}
+                 <tr>
+                    <td class="fpr">{{je.date}}</td>
+                    <td class="fpr">{{je.subject}}</td>
+                    <td class="fpr">{{je.detail}}</td>
+                 </tr>
+                 {% endfor %}
+               </table>    
+             </div>
+             {% else %}
+             <p>No journal entries.</p> 
+             {% endif %}
+             {% if j_form %}
+             <p>Post additional remarks concerning:</p>
+              <table col="1" rules="NONE" border="0">
+                <colgroup>
+                  <col width=200 /> 
+                </colgroup>
+                <tr>
+                   <td class="fpr">{{j_form.jf_subject}}</td>
+                <tr>
+                </tr>
+                   <td class="fpr">{{j_form.jf_comment}}</td>
+                </tr>
+              </table>    
+             {% endif %}  
+          </td> 
+        </tr>
+        <tr>
+           <td class="inf" valign="top">
+            <!-- Row 2, Col 1 -->
+            <p>Telephone</p> 
+            <table col="2" rules="NONE" border="0">
+              <tr>
+                <td>{{telnum_form.tf_area.errors}}</td>
+                <td>{{telnum_form.tf_exch.errors}}</td>
+                <td>{{telnum_form.tf_line.errors}}</td>
+                <td>{{telnum_form.tf_ext.errors}}</td>
+              </tr>
+              <tr> 
+                <td class="aok" title="{{telnum_form.area.help_text}}">{{telnum_form.tf_area}}</td>
+                <td class="aok" title="{{telnum_form.exch.help_text}}">{{telnum_form.tf_exch}}</td>
+                <td class="aok" title="{{telnum_form.line.help_text}}">{{telnum_form.tf_line}}</td>
+                <td class="aok" title="{{telnum_form.ext.help_text}}">{{telnum_form.tf_ext}}</td>
+              </tr>
+            </table>
+           </td>
+        </tr>
+        <tr>
+          <td class="inf" valign="top">
+            <!-- Row 3, Col 1 -->
+            <p>Email</p>
+            <table col="2" rules="NONE" border="0">
+            {% for field in email_form %}
+              <tr>
+                <td class="aok" title="{{field.help_text}}">
+                   {{field.label}}
+                </td>
+                <td>
+                   {{field}}
+                </td>
+              </tr>
+            {% endfor %}
+            </table>
+           </td>
+           <td class="inf" valign="top" rowspan="2">
+             <!-- Row 3, Col 2, Row 4, Col 2 -->
+             <p>Pets</p>
+             {% if p_entries %}
+             <table col="3" rules="NONE" border="0">
+               <colgroup>
+                 <col width="30" />
+                 <col width="50" />
+                 <col width="190" /> 
+                 <col width="50" /> 
+               </colgroup>
+               <tr>
+                 <td class="hdrfpr">ID</td> 
+                 <td class="hdrfpr">Name</td> 
+                 <td class="hdrfpr">Description</td>
+                 <td class="hdrfpr">Dog Tag</td>
+               </tr>
+             </table>
+             <div style="height:100;width:350;overflow:auto">
+               <table col="4" rules="NONE" border="0">
+                 <colgroup>
+                   <col width="30" />
+                   <col width="50" />
+                   <col width="190" /> 
+                   <col width="50" /> 
+                 </colgroup>
+                 {% for pe in p_entries %}
+                 <tr>
+                    <td class="fpr">{{pe.identifier}}</td>
+                    <td class="fpr">{{pe.name}}</td>
+                    <td class="fpr">{{pe.description}}</td>
+                    <td class="fpr">{{pe.dogtag}}</td> 
+                 </tr>
+                 {% endfor %}
+               </table>    
+             </div>
+             {% else %}
+             <p>No pets have been entered.</p>
+             {% endif %}
+             {% if p_form %}
+             <p>Register a pet:</p>
+              <table col="2" rules="NONE" border="0">
+                <colgroup>
+                  <col width="90" /> 
+                  <col width="90" /> 
+                </colgroup>
+                <tr>
+                   <td class="fpr">{{p_form.pf_name.label}}<br />{{p_form.pf_name}}</td>
+                   <td class="fpr">{{p_form.pf_dgtg.label}}<br />{{p_form.pf_dgtg}}</td>
+                </tr>
+                <tr>
+                   <td colspan="2" class="fpr">{{p_form.pf_desc.label}}{{p_form.pf_desc}}</td>
+                </tr>
+              </table>    
+             {% endif %}
+           </td> 
+           <td class="inf" valign="top" rowspan="2">
+             <!-- Row 3, Col 3, Row 4, Col 3 -->
+             <p>Dues Review</p>
+             {% if d_entries %}
+             <table col="3" rules="NONE" border="0">
+               <colgroup>
+                 <col width=90 />
+                 <col width=50 />
+                 <col width=250 /> 
+               </colgroup>
+               <tr>
+                 <td class="hdrfpr">Date</td> 
+                 <td class="hdrfpr">Type</td> 
+                 <td class="hdrfpr">Amount</td>
+               </tr>
+             </table>
+             <div style="height:50;width:400;overflow:auto">
+               <table col="3" rules="NONE" border="0">
+                 <colgroup>
+                   <col width=90 />
+                   <col width=50 />
+                   <col width=250 /> 
+                 </colgroup>
+                 {% for de in d_entries %}
+                 <tr>
+                    <td class="fpr">{{de.date}}</td>
+                    <td class="fpr">{{de.type}}</td>
+                    <td class="fpr">{{de.amount}}</td>
+                 </tr>
+                 {% endfor %}
+               </table>    
+             </div>
+             {% else %}
+             <p>No Dues entries</p>
+             {% endif %}
+             {% if d_form %}
+             <p>Post new dues payments:</p>
+              <table col="2" rules="NONE" border="0">
+                <colgroup>
+                  <col width=70 /> 
+                  <col width=70 /> 
+                </colgroup>
+                <tr>
+                   <td class="fpr">{{d_form.df_paytype}}</td>
+                   <td class="fpr">{{d_form.df_amount}}</td>
+                </tr>
+              </table>    
+             {% endif %}
+             {% if r_entry %}  
+             <table col="1" rules="NONE" border="0">
+               <colgroup>
+                 <col width = 390> 
+               </colgroup>
+                 <tr>
+                   <td class=hdr>
+                     Expiry
+                   </td>
+                 </tr>
+                 <tr>
+                   <td class="{{r_entry.htmlclass}}">
+                     {{r_entry.entry}}
+                   </td>
+                 </tr>
+             </table>
+             {% endif %}
+           </td> 
+        </tr>
+        <tr>
+           <td class="inf" valign="top">
+             <!-- Row 4, Col 1 -->
+             <p>Member Preferences</p>
+             {% if pref_flags %}
+               <table col="2" rules="NONE" border="0">
+                 <colgroup>
+                   <col width=190 />
+                   <col width=40 />
+                 </colgroup>
+                 <tr> 
+                    <td class="hdrfpr">Service</td> 
+                    <td class="hdrfpr">Active?</td> 
+                 </tr>
+               </table>
+             <div style="height:70;width:240;overflow:auto">
+               <table col="2" rules="NONE" border="0">
+                 <colgroup>
+                   <col width=190 />
+                   <col width=40 />
+                 </colgroup>
+               {% for flag in pref_flags %}
+                 <tr> 
+                    <td class="fpr">{{flag.label}}</td> 
+                    <td class="fpr">{{flag}}</td>
+                 </tr>
+               {% endfor %}
+             </table>
+            </div>
+             {% else %}
+               <p>No services are available to this member.</p> 
+             {% endif %} 
+           </td> 
+        </tr>
+        <tr>
+          <td class="inf" colspan=3 title="Commit changes" align="RIGHT">
+             <!-- Row 5, Col 1-3 -->
+            <input type="submit" value="Update"> 
+          </td> 
+        </tr>
+      </table>
+    </form>
+  </div>
+{% endblock %}

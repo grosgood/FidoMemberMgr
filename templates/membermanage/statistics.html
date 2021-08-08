@@ -1,0 +1,37 @@
+{% extends "membermanage/base.html" %}
+{% load breadcrumb_url breadcrumb from breadcrumbs %}
+{% block pagetitle %}
+  <span class="title">{{pgtitle}}</span>
+{% endblock %}
+{% block content %}
+    <div id="outermost" style="position:absolute;left:200;top:0;z-index:1">
+      <p style="text-align:center">
+         <table col='1' rules="NONE" border="0" cellspacing='3'>
+           <colgoup>
+             <col width="800">
+           </colgroup>
+           {% for chartdic in charts %}
+           <tr>
+             <td class="inf" style="text-align:center">
+               <p style="font-size:large;font-weight:bold">{{ chartdic.name }}</p>
+             </td>
+           </tr>
+           <tr>
+             <td class="hdr" style="text-align:center">
+               <a title="{{ chartdic.name }}" href="{{ charturl }}/{{ chartdic.image }}">
+                 <img src="{{ charturl }}/{{ chartdic.thumb }}" alt="{{ chartdic.name }}" />
+               </a>
+             </td>
+           </tr>
+           <tr>
+             <td class="inf">
+               <p>
+                 {{ chartdic.doc }}
+               </p>
+             </td>
+           </tr>
+           {% endfor %}
+         </table>
+      </p>
+    </div>
+{% endblock %}

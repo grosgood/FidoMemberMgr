@@ -1,0 +1,49 @@
+{% extends "membermanage/smallbase.html" %}
+{% block scriptlist %}
+   {% for scripturl in scriptlist %}
+      <script type="text/javascript" language="javascript" src="{{scripturl}}"></script>
+   {% endfor %}
+{% endblock %}
+{% block content %}
+{% if member.wizard %}
+<form action= "{{member.wizard}}" method="POST">{% csrf_token %}
+{% else %}
+<form action= "{% url 'fidoonline.membermanage.memberactions.requestchangeaddress' member.id %}" method="POST">{% csrf_token %}
+{% endif %}
+  <table col="2" rules="NONE" border="0">
+    <colgroup>
+      <col width=120>
+      <col width=380>
+    </colgroup>
+    <tbody>
+      {% for field in member.form %}
+      <tr>
+        <td class="nut" title="{{field.help_text}}">
+        {{field.label}}
+        </td>
+        <td>
+        {{field}}
+        </td>
+      </tr>
+      {% endfor %}
+      {% if member.wizard %}
+        <td class="inf" title="Close wizard; changes up to (but not including) this stage saved." align="RIGHT">
+          <input type="submit" name="CancelAddressButton" value="Cancel" onclick="wizardCancel('{{member.canurl}}')"> 
+        </td> 
+        <td class="nob">&nbsp;</td>
+        <td class="inf" title="Commit US mail address; go to email" align="RIGHT">
+          <input type="submit" name="AddAddressButton" value="Next"> 
+        </td>
+      {% else %}
+        <td class="inf" title="Withdraw changes" align="RIGHT">
+          <input type="submit" name="CancelButton" value="Cancel"> 
+        </td> 
+        <td class="nob">&nbsp;</td>
+        <td class="inf" title="Commit changes" align="RIGHT">
+          <input type="submit" name="UpdateButton" value="Update"> 
+        </td>
+      {% endif %} 
+    </tbody>
+  </table>
+</form>
+{% endblock %}

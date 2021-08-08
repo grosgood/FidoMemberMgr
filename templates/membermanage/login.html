@@ -1,0 +1,60 @@
+{% extends "membermanage/base.html" %}
+
+{% block content %}
+
+<form method="post" action="{% url 'django.contrib.auth.views.login' %}">
+{% csrf_token %}
+<div class="dctry" style="text-align:center">
+<table class="dctry"cols="2" style="margin-left:300px">
+<tbody>
+<tr>
+   <td colspan=2 class="dctry-row">
+     {% if form.errors %}
+        <p class=warn>Your username and password didn't match. Please try again.</p>
+     {% else %}
+        <p style="text-align:justified">&emsp;&emsp;&emsp;&emsp;&emsp;</p>
+     {% endif %}
+   </td> 
+</tr>
+<tr>
+    <td colspan=2 class="dctry-hdr" style="text-align:center">Login</td>
+</tr>
+<tr>
+    <td class="dctry-row">{{ form.username.label_tag }}</td>
+    <td class="dctry-row">{{ form.username }}</td>
+</tr>
+<tr>
+    <td class="dctry-row">{{ form.password.label_tag }}</td>
+    <td class="dctry-row">{{ form.password }}</td>
+</tr>
+    <td class="dctry-cntl" colspan="2">
+      <input type="submit" value="login" />
+      <input type="hidden" name="next" value="{{ next }}" />
+    </td>
+  </tr>
+  <tr>
+    <td colspan=2 class="dctry-row">
+       <p style="font-family:Paladio,Times-Roman,serif;font-size:large;text-align:center;letter-spacing:2px">&bull;&ensp;GREETINGS&ensp;&bull;</p>
+       <p>
+         This is a web application supporting the Membership
+         Committee of <a href="http://www.fidobrooklyn.org" title="FIDO In Prospect Park">FIDO in Prospect Park</a>. If you are a member
+         of this committee, or of the Steering Committee, have 
+         gotten this far but don't know how to proceed, then you
+         should contact the Membership Chair by the usual means.
+         If you are not a member of these committees, or are just
+         generally interested in FIDO, you should go to the offical
+         web site, <a href="http://www.fidobrooklyn.org" title="FIDO In Prospect Park">FIDO in Prospect Park</a> which has information about the
+         organization, its purpose, events, and &mdash; if you are keen
+         on preserving off-leash privileges for canines in 
+         <a href="http://prospectpark.org" title="The Alliance of Prospect Park">Prospect Park</a>, Brooklyn, New York &mdash; 
+         in <a href="http://www.fidobrooklyn.org/membership/membership.html" title="Join FIDO Online">joining our organization</a>. Then, at some future date,
+         you might re-visit this mundane, administrative web site as
+         a volunteer of the Membership Committee, where the elite meet to eat, or, better, perhaps, to decode strangely written email addresses on membership forms. 
+       </p>
+    </td> 
+  </tr>
+</table>
+</tbody>
+</form>
+</div>
+{% endblock %}

@@ -1,0 +1,71 @@
+{% extends "membermanage/base.html" %}
+{% block title %}
+   {{window_title}}
+{% endblock %}
+{% block pagetitle %}
+   <span class="title">{{pagetitle}}</span>
+{% endblock %}
+{% block content %}
+   <div class='dctry'>
+     <table col="3" rules="NONE" border="0">
+       <colgroup>
+          <col width="85">
+          <col width="85">
+          <col width="650">
+       </colgroup>
+       <tbody>
+          <tr>
+            <td class="dctry-row">
+               <img width="84" height="84" alt="Find it" src="/sitemedia/finditicon.png" />
+            </td>
+            <td class="dctry-hdr">
+              <p>{{search_title}}</p>
+            </td> 
+            <td class="dctry-row">
+              {% include "membermanage/memberpick.html" %}
+              &nbsp;
+            </td>
+          </tr>
+          <tr>
+             <td class="dctry-row">
+               <img width="84" height="84" alt="Find it" src="/sitemedia/memlisticon.png" />
+             </td>
+             <td class="dctry-hdr">
+               <p>{{directtitle}}</p>
+            </td>
+            <td class="dctry-row">
+             {% for itm in directoryset %}
+             <a title='{{itm.name}}' href="{{itm.location}}">{{itm.name}}</a>&nbsp;&bull;&nbsp;
+             {% endfor %}
+            </td>
+          </tr>
+          <tr>
+             <td class="dctry-row">
+                <img  width="84" height="84" alt="Find it" src="/sitemedia/howicon.png" />
+             </td>
+             <td class="dctry-hdr">
+               <p>How</p>
+             </td>  
+            <td class="dctry-row">
+               <ol>
+                 <li><a href="javascript:startWizardWindow('/sitemedia/howtofind.html')">How to look up a FIDO member (quick! Just tell me!)</a></li>
+                 <li><a href="/sitemedia/cookbook.pdf">User Manual and Cookbook - Portable Document Format (PDF)</a></li>
+               </ol>
+            </td>
+          </tr>
+          <tr>
+             <td class="dctry-row">
+                <img  width="84" height="84" alt="Member journal" src="/sitemedia/journalicon.png" />
+             </td>
+             <td class="dctry-hdr">
+               <p>{{j_title}}</p>
+             </td>  
+            <td class="dctry-row">
+               <p>{{j_summary}}</p>
+               {% include 'membermanage/jlist.html' %}
+            </td>
+          </tr>
+       </tbody>
+     </table> 
+   </div>
+{% endblock %}

@@ -1,0 +1,192 @@
+{% extends "membermanage/smallbase.html" %}
+{% block content %}
+<form action= "{% url 'fidoonline.membermanage.memberactions.changepet' member.memberid pet.petid %}" method="POST">{% csrf_token %}
+  <table col="3" rules="NONE" border="0" summary="">
+    <colgroup>
+      <col width=120>
+      <col width=180>
+      <col width=120>
+    </colgroup>
+    <tbody>
+      <tr>
+       <td class="nut" title="{{pform.pf_name.help_text}}">
+        {{pform.pf_name.label}}
+        </td>
+        <td>
+        {{pform.pf_name}}
+        </td>
+        <td>
+        {% if pform.pf_name.errors %}
+          <ul>
+          {% for err in pform.pf_name.errors %}
+            <li class="smallwarn">{{err}}</li>
+           {% endfor %}
+          </ul>
+         {% else %}
+           &nbsp;
+         {% endif %}
+        </td>
+      </tr>
+      <tr>
+        <td class="nut" title="{{pform.pf_desc.help_text}}">
+        {{pform.pf_desc.label}}
+        </td>
+        <td>
+        {{pform.pf_desc}}
+        </td>
+        <td>
+        {% if pform.pf_desc.errors %}
+          <ul>
+          {% for err in pform.pf_desc.errors %}
+            <li class="smallwarn">{{err}}</li>
+           {% endfor %}
+          </ul>
+         {% else %}
+           &nbsp;
+         {% endif %}
+        </td>
+      </tr>
+      <tr>
+        <td class="nut" title="{{tform.ta_number.help_text}}">
+        {{tform.ta_number.label}}
+        </td>
+        <td>
+        {{tform.ta_number}}
+        </td>
+        <td>
+        {% if tform.ta_number.errors %}
+          <ul>
+          {% for err in tform.ta_number.errors %}
+            <li class="smallwarn">{{err}}</li>
+          {% endfor %}
+          </ul>
+         {% else %}
+           &nbsp;
+         {% endif %}
+        </td>
+      </tr>
+      {% if taglist %}
+      <tr>
+        <td class="nut" colspan="3" title="Assigned Tags">
+          <table cellspacing="1" cols="4" rules="NONE" border="0" summary="Listing of FIDO Tags which have been assigned to this dog.">
+            <colgroup>
+              <col width="100" />
+              <col width="170" />
+              <col width="120" />
+              <col width="50" />
+            </colgroup>
+          <tbody>
+            <tr>
+              <td class="hdr" colspan="4" >
+                Associated FIDO Dog Tags 
+              </td>
+            </tr>
+            <tr>
+              <td class="dkh" style="height:15">
+                 Tag
+              </td>
+              <td class="dkh" style="height:15">
+                 Date Assigned
+              </td>
+              <td class="dkh" style="height:15">
+                 Status
+              </td>
+              <td class="dkh" style="height:15">
+                 Release
+              </td>
+            </tr>
+            {% for row in taglist %}
+            <tr>
+              {% for cell in row %}
+                 {% if forloop.last and cell.data|length > 1%}
+                   <td class="nut" colspan="{{cell.span}}" title="{{cell.helptext}}" style= "text-align:center;padding:0">
+                      <input type="checkbox" name="{{cell.data.checkname}}" value="{{cell.data.checkvalue}}" />
+                   </td>
+                 {% else %}
+                   <td class="nut" colspan="{{cell.span}}" title="{{cell.helptext}}" style="text-align:left;padding:0">{{cell.data.checkvalue}}</td>
+                 {% endif %}
+              {% endfor %}
+            </tr>
+            {% endfor %}
+          </table>
+        </td>
+      </tr>
+      {% endif %}
+      {% if coownlist %}
+      <tr>
+        <td class="nut" colspan="3" title="Co-owners">
+          <table cellspacing="1" cols="3" rules="NONE" border="0" summary="Other members who co-own this pet.">
+            <colgroup>
+              <col width="150" />
+              <col width="150" />
+              <col width="150" />
+            </colgroup>
+          <tbody>
+            <tr>
+              <td class="hdr" colspan="3" >
+                Co-owners
+              </td>
+            </tr>
+            <tr>
+              <td class="dkh" style="height:15">
+                Member ID
+              </td>
+              <td class="dkh" style="height:15">
+                Co-owning Member 
+              </td>
+              <td class="dkh" style="height:15">
+                Release
+              </td>
+            </tr>
+            {% for row in coownlist %}
+            <tr>
+              {% for cell in row %}
+                 {% if forloop.last and cell.data|length > 1 %}
+                   <td class="nut" colspan="{{cell.span}}" title="{{cell.helptext}}" style= "text-align:center;padding:0">
+                      <input type="checkbox" name="{{cell.data.checkname}}" value="{{cell.data.checkvalue}}" />
+                   </td>
+                 {% else %}
+                   <td class="nut" colspan="{{cell.span}}" title="{{cell.helptext}}" style="text-align:left;padding:0">{{cell.data.checkvalue}}</td>
+                 {% endif %}
+              {% endfor %}
+            </tr>
+            {% endfor %}
+          </table>
+        </td>
+      </tr>
+      {% endif %} 
+      <tr>
+        <td class="nut" style="text-align:right">
+          <input type="SUBMIT" name="CancelButton" value="Cancel" title="Return without making changes.">
+        </td>
+        <td class="nut" style="text-align:right">
+          <input type="SUBMIT" name="UpdateButton" value="Update Pet" title="Commit name or description changes.">
+        </td>
+        <td class="nut" style="text-align:right">
+          <input type="SUBMIT" name="DeleteButton" value="Delete" title="Release tags, dissassociate from owners, and remove Pet record from the database." style="background-color:#e00060;color:white">
+        </td>
+      </tr>
+      <tr>
+      {% autoescape off %}
+        <td class="nut" colspan="3">
+           {% if pform.non_field_errors %}
+              <ul>
+              {% for err in pform.non_field_errors %} 
+	        <li class="warn">{{err}}</li>
+              {% endfor %}
+              </ul> 
+           {% endif %} 
+           {% if tform.non_field_errors %}
+              <ul>
+              {% for err in tform.non_field_errors %} 
+	         <li class="warn">{{err}}</li>
+              {% endfor %}
+              </li>
+           {% endif %}
+        </td> 
+      {% endautoescape %}
+      </tr>
+    </tbody>
+  </table>
+</form>
+{% endblock %}

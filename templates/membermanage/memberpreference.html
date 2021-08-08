@@ -1,0 +1,30 @@
+{% extends "membermanage/smallbase.html" %}
+{% block scriptlist %}
+   {% for scripturl in scriptlist %}
+      <script type="text/javascript" language="javascript" src="{{scripturl}}"></script>
+   {% endfor %}
+{% endblock %}
+{% block content %}
+{% include 'membermanage/membertablelayout.html' %}
+{% if member.wizard %}
+<form  action="{{member.wizard}}" method="POST">{% csrf_token %} 
+  <table col="3" rules="NONE" border="0">
+    <colgroup>
+      <col width=200>
+      <col width=80>
+      <col width=200>
+    </colgroup>
+    <tbody>
+        <td class="inf" title="Withdraw changes" align="RIGHT">
+          <input type="button" title="Review the new Member record." name="ReviewPrefsButton" value="Review" onclick="wizardCancel({{member.canurl}})"> 
+        </td> 
+        <td class="nob">&nbsp;</td>
+        <td class="inf" title="Commit changes" align="RIGHT">
+          <input type="submit" title="Copy the new Member record and modify it as the New Member's spouse." name="CopyPrefsButton" value="Copy And Edit"> 
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</form>
+{% endif %} 
+{% endblock %}

@@ -1,0 +1,58 @@
+{% extends "membermanage/smallbase.html" %}
+{% block scriptlist %}
+   {% for scripturl in scriptlist %}
+      <script type="text/javascript" language="javascript" src="{{scripturl}}"></script>
+   {% endfor %}
+{% endblock %}
+{% block content %}
+{% if member.wizard %}
+<form action= "{{member.wizard}}" method="POST">{% csrf_token %}
+{% else %}
+<form action= "{% url 'fidoonline.membermanage.memberactions.requestchangename' member.id %}" method="POST">{% csrf_token %}
+{% endif %}
+  <table col="3" rules="NONE" border="0">
+    <colgroup>
+      <col width=200>
+      <col width=80>
+      <col width=200>
+    </colgroup>
+    <tbody>
+      <tr>
+        <td class="inf" valign="top" colspan=3>
+          <table col="2" rules="NONE" border="0">
+          {% for field in member.form %}
+            <tr>
+              <td class="nut" title="{{field.help_text}}">
+                 {{field.label}}
+              </td>
+              <td>
+                 {{field}}
+              </td>
+            </tr>
+          {% endfor %}
+          </table>
+        </td>
+      </tr>   
+      <tr>
+      {% if member.wizard %}
+        <td class="inf" title="Withdraw changes" align="RIGHT">
+          <input type="button" name="CancelNewMemberButton" value="Cancel" onclick="javascript:window.close()"> 
+        </td> 
+        <td class="nob">&nbsp;</td>
+        <td class="inf" title="Commit changes" align="RIGHT">
+          <input type="submit" name="AddNewMemberButton" value="Add"> 
+        </td>
+      {% else %}
+        <td class="inf" title="Withdraw changes" align="RIGHT">
+          <input type="submit" name="CancelButton" value="Cancel"> 
+        </td> 
+        <td class="nob">&nbsp;</td>
+        <td class="inf" title="Commit changes" align="RIGHT">
+          <input type="submit" name="UpdateButton" value="Update"> 
+        </td>
+      {% endif %} 
+      </tr>
+    </tbody>
+  </table>
+</form>
+{% endblock %}

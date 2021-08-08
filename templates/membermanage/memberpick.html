@@ -1,0 +1,102 @@
+{% if addenda.banner %}
+<div style="position:relative;left:-8px;top:-8px;z-index:0">
+   <img src="/sitemedia/banner.png" name="ciaobellabanner" width="1054" height="150" border="0" id="ciaobellabanner">
+   <div style="margin:0px;position:absolute;left:0px;top:25px;z-index:1">
+      <table cols="2" rules="None">
+         <colgroup>
+           <col width="410">
+           <col width="640">
+         </colgroup>
+         <tr>
+           <td class="bnr">
+             <img src="/sitemedia/fidologo.png" name="fidologo" width="165" height="90" border="0" id="fidologo">
+           </td>
+           <td class="bnr">
+             <span class="title">{{addenda.title}}</span>
+           </td> 
+         </tr>
+      </table>
+   </div>
+</div>
+{% endif %}
+{% if addenda.lookup.lu_search.errors %}
+  <p class="warn">{{addenda.lookup.lu_search.errors}}</p>
+{% endif %} 
+  <table cellspacing="1" cols="2" rules="NONE" border="0">
+  <colgroup>
+     <col width="450" />
+     <col width="250" />
+  </colgroup> 
+  <tbody>
+    <tr>
+      <td class="nut" >
+        <form action="{{addenda.action}}" method="POST">{% csrf_token %}
+          {{addenda.lookup.lu_search.label_tag}}&nbsp;{{addenda.lookup.lu_search}}
+          <input type="SUBMIT" name="{{addenda.sfname}}" value="{{addenda.sfvalue}}">
+        </form>
+      </td>
+      {% if addenda.addjsaction %}
+      {% autoescape off %}
+      <td class="nut">
+          <form action="">
+             <input type="BUTTON" name="{{addenda.addjsaction.name}}" value="{{addenda.addjsaction.value}}" onclick="{{addenda.addjsaction.action}}">
+          </form>
+      </td>
+      {% endautoescape %}
+      {% else %}
+      <td>&nbsp;</td>
+      {% endif %}
+    </tr>
+    {% if addenda.tabdat %}
+    {% with addenda.tabdat as td  %}
+    <tr>
+      <td class="dkh" style="height:15">
+        {{td.coltitle}}
+      </td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <td class="inf" padding=0>
+        <div style="height:70;width:520;overflow:auto">
+          <table col="3" rules="NONE" border="0" cellspacing="1" style="margin:0">
+            <colgroup>
+              <col width="167" />
+              <col width="167" />
+              <col width="166" />
+            </colgroup>
+            <tbody>
+              <tr> <!-- homesteader -->
+              {% for row in td.rows %}
+              <!-- {% cycle 2 1 0 as cindx %} -->
+                <td class="nut" style="text-align:left;padding=0">
+                   <form action="{{addenda.action}}" method="POST" target="{{row.target}}">{% csrf_token %}<input type="submit" value="{{row.Member}}" name="{{row.Pick}}" />
+                </td>
+                {% if cindx == 0 and not forloop.last %}
+              </tr> <!-- dynamic end -->
+              <tr>  <!-- dynamic bgn -->
+                {% endif %}
+                {% if forloop.last %}
+                {% if cindx == 2 %}
+                <td class="nut">&nbsp;</td><td class="nut">&nbsp;</td>
+                {% endif %} 
+                {% if cindx == 1 %}
+                <td class="nut">&nbsp;</td>
+                {% endif %}
+                {% endif %} 
+              {% endfor %}
+              </tr> <!-- homesteader -->
+            </tbody>
+          </table>
+        </div>
+      </td>
+    </tr>
+      <tr>
+        <td class="inf" colspan="{{td.size}}" style="font-size:x-small">
+          {{td.msg}}
+        </td>
+        <td>&nbsp;</td>
+      </tr>
+      {% endwith %}
+      {% endif %}
+  </tbody>
+  </table>

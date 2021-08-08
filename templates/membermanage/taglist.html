@@ -1,0 +1,49 @@
+{% extends "membermanage/base.html" %}
+{% load breadcrumb_url breadcrumb from breadcrumbs %}
+{% block title %}
+   {{window_title}}
+{% endblock %}
+
+{% block pagetitle %}
+   <span class="title">{{page_title}}</span>
+{% endblock %}
+
+{% block content %}
+  {% if pets and table_headers %}
+    <table cols="{{ table_headers|length }}" rules="NONE" border="0">
+      <colgroup>
+      {% for hdr in table_headers %}
+        <col width={{hdr.width}}>
+      {% endfor %} 
+      </colgroup>
+      <tr>
+      {% for hdr in table_headers %}
+        <td class="hdr">{{hdr.name}}</td>
+      {% endfor %}
+      </tr> 
+    </table>
+    <div style="height:500;width:1100;overflow:auto">
+    <table col="table_headers|length" rules="NONE" border="0">
+      <colgroup>
+      {% for hdr in table_headers %}
+        <col width={{hdr.width}}>
+      {% endfor %} 
+      </colgroup>
+      {% for pet in pets %}
+      <tr>
+        <td class="aok">{{ pet.tags }}</td>
+        <td class="aok">{{ pet.name }}</td>
+        <td class="aok"><a href="{{ pet.link }}">{{ pet.members }}</a></td>
+        <td class="aok">{{ pet.assocs }}</td>
+        {% if pet.emlink %}
+           <td class="aok"><a href="{{ pet.emlink }}">{{ pet.emails }}</a></td>
+        {% else %}
+           <td class="aok">{{ pet.emails }}</td>
+        {% endif %}
+        <td class="aok">{{ pet.telephones }}</td>
+      </tr>
+      {% endfor %}
+    </table>
+   </div> 
+  {% endif%}
+{% endblock %}

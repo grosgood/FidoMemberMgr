@@ -1,0 +1,17 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Frameset//EN" "http://www.w3.org/TR/html4/frameset.dtd">
+
+<html>
+  <head>
+    <meta http-equiv="CONTENT-TYPE" content="text/html; charset=us-ascii">
+    <title>{% block title %}Fido Membership Matters{% endblock %}</title>
+    <link href="/sitemedia/membermanage.css" rel="stylesheet" type="text/css" media="screen" />
+    {% block scriptlist %}
+    {{script_list}}
+    {% endblock %}
+  </head>
+  <body class="smallbase"> 
+  {% block content %}
+  {{content_text}}
+  {% endblock %}
+  </body>
+</html>

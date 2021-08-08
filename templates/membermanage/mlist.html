@@ -1,0 +1,72 @@
+{% extends "membermanage/base.html" %}
+{% load breadcrumb_url breadcrumb from breadcrumbs %}
+{% block title %}
+   {{window_title}}
+{% endblock %}
+
+
+{% block pagetitle %}
+   <span class="title">{{page_title}}</span>
+{% endblock %}
+
+{% block content %}
+  {% if member_names and table_headers %}
+    <table cols="8" rules="NONE" border="0">
+      <colgroup>
+      {% for hdr in table_headers %}
+        <col width={{hdr.width}}>
+      {% endfor %} 
+      </colgroup>
+      <tr>
+      {% for hdr in table_headers %}
+        <td class="hdr">{{hdr.name}}</td>
+      {% endfor %}
+      </tr> 
+    </table>
+    <div style="height:500;width:1100;overflow:auto">
+    <table col="8" rules="NONE" border="0">
+      <colgroup>
+      {% for hdr in table_headers %}
+        <col width={{hdr.width}}>
+      {% endfor %} 
+      </colgroup>
+      {% for member in member_names %}
+      <tr>
+        <td class="aok"><a title='Edit {{member.name}} ({{member.identifier}})' href='{% url "fidoonline.membermanage.memberviews.detailmemberframeset" member.identifier %}'>{{member.name}}</a></td>
+        {% if member.mailadr.err %}
+            <td class="err">&mdash;</td>
+        {% else %} 
+            <td class="aok">{{member.mailadr.street}}</td>
+        {% endif %}
+        {% if member.mailadr.err %}
+            <td class="err">&mdash;</td>
+        {% else %} 
+            <td class="aok">{{member.mailadr.city}}</td>
+        {% endif %}
+        {% if member.mailadr.err %}
+            <td class="err">&mdash;</td>
+        {% else %} 
+            <td class="aok">{{member.mailadr.state}}</td>
+        {% endif %}
+        {% if member.mailadr.err %}
+            <td class="err">&mdash;</td>
+        {% else %} 
+            <td class="aok">{{member.mailadr.zipcode}}</td>
+        {% endif %}
+        {% if member.telephone.err %}
+            <td class="err">&mdash;</td>
+        {% else %}
+            <td class="aok">{{member.telephone.number}}</td>
+        {% endif %}
+        {% if member.email.err %}
+            <td class="err">&mdash;</td>
+        {% else %}
+            <td class="aok"><a href="mailto:{{member.email.address}}">{{member.email.address}}</a></td>
+        {% endif %}
+        <td class="{{member.status.style}}">{{member.status.expiry}}</td>
+      </tr>
+      {% endfor %}
+    </table>
+   </div> 
+  {% endif%}
+{% endblock %}

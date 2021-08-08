@@ -1,0 +1,34 @@
+    <table cols="5" rules="NONE" border="0">
+      <colgroup>
+      {% for hdr in jentries.journal_headers %}
+        <col width={{hdr.width}}>
+      {% endfor %} 
+      </colgroup>
+      <tr>
+      {% for hdr in jentries.journal_headers %}
+        <td class="hdr">{{hdr.name}}</td>
+      {% endfor %}
+      </tr> 
+    </table>
+    <div style="height:300;width:800;overflow:auto">
+    <table col="5" rules="NONE" border="0">
+      <colgroup>
+      {% for hdr in jentries.journal_headers %}
+        <col width={{hdr.width}}>
+      {% endfor %} 
+      </colgroup>
+      {% if jentries.entries|length == 0 %}
+      <tr><td class="aok" colspan="5"><p>There has been no changes to membership records recently.</p></td></tr>
+      {% else %}
+          {% for itm in jentries.entries %}
+          <tr>
+            <td class="aok">{{itm.member.id}}</td>
+            <td class="aok"><a title='Edit {{itm.member.name}} ({{itm.member.name}})' href='{% url "fidoonline.membermanage.memberviews.detailmemberframeset" itm.member.id %}'>{{itm.member.name}}</a></td>
+            <td class="aok">{{itm.entrydate}}</td>
+            <td class="aok">{{itm.subject}}</td>
+            <td class="aok">{{itm.comment}}</td>
+          </tr>
+          {% endfor %}
+      {% endif %}
+        </table>
+   </div> 

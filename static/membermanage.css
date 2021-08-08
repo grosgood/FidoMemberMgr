@@ -1,0 +1,41 @@
+/* FIDO Member Manager stylesheet */
+
+ @page  { size: landscape;}
+ body.base      { background-color:#fff4cf;margin:0px;padding:0px;}
+ body.smallbase { background-color:#fff4cf;margin:0px;padding:0px;}
+ p      { font-family:Helvetica,Arial,sans;font-size:normal;font-style:normal;margin-bottom: 0.08in}
+ .gtxt  { font-family:Helvetica,Arial,sans;font-size:normal;font-style:normal;margin-bottom: 0.08in}
+ .lbl   { font-family:Helvetica,Arial,sans;font-size:small;font-style:oblique;padding:3 }
+ .warn  { font-family:Helvetica,Arial,sans;font-size:small;font-style:oblique;font-weight:bold;color:#f04000;margin-bottom:0.08in}
+ .smallwarn  { font-family:Helvetica,Arial,sans;font-size:x-small;font-style:oblique;color:#f04000;margin-bottom:0.04in}
+ .crumbline  { background-color:#fff4cf;font-family:Helvetica,Arial,sans;font-size:small;font-style:oblique;color:#104090;position:absolute;left:100px;top:-27px;z-index:1;width:740px;}
+img.breadcrumbs-arrow {vertical-align:middle;}
+
+ div.dctry       { width: 740px;margin-left:100px;margin-right:100px; }
+ table.dctry     { margin:1px;border:0px; }
+ td.dctry-hdr    { background-color:#5ba45b;color:#ffffff;font-family:Helvetica,Arial,sans;font-size:small;font-style:italic;font-weight:bold;padding:3px;vertical-align:top; }
+ td.dctry-row    { background-color:#fff4e0;color:#404000;font-family:Helvetica,Arial,sans;font-size:small;font-style:italic;padding:3px;vertical-align:top; }
+ td.dctry-cntl   { background-color:#6f916f;color:#404000;font-family:Helvetica,Arial,sans;font-size:small;font-style:italic;padding:3px;vertical-align:top; } 
+ a:link          { text-decoration:none;color:#104090;}
+ a:hover         { text-decoration:none;color:#004bc6;}
+ a:active        { text-decoration:none;color:#c60009;}
+ a:visited       { text-decoration:none;color:#104090;}
+
+ span.title { font-family:Helvetica,Arial,sans;font-size:x-large;font-style:normal;font-weight:bold;align:left;vertical-align:bottom;color:white }
+ table      { font-size: small}
+ td.act     { background-color:#afe092;font-family:Helvetica,Arial,sans;font-size:small;font-weight:bold;padding:3px}
+ td.aok     { background-color:#d0ffd0;font-family:Helvetica,Arial,sans;font-size:small;font-style:italic;padding:3px }
+ td.dkh     { background-color:#488248;font-family:Helvetica,Arial,sans;font-size:small;color:white;padding:3px }
+ td.err     { background-color:#ffd0d0;font-family:Helvetica,Arial,sans;font-size:small;font-style:italic;padding:3px }
+ td.exn     { background-color:#e1e079;font-family:Helvetica,Arial,sans;font-size:small;font-weight:bold;padding:3px }
+ td.exp     { background-color:#e8c979;font-family:Helvetica,Arial,sans;font-size:small;font-weight:bold;padding:3px }
+ td.fpr     { background-color:#d0ffd0;font-family:Helvetica,Arial,sans;font-size:x-small;font-style:normal;padding:3px }
+ td.hdr     { background-color:#5ba45b;font-family:Helvetica,Arial,sans;font-size:small;font-weight:bold;color:white;padding:3px }
+ td.hdrfpr  { background-color:#5ba45b;font-family:Helvetica,Arial,sans;font-size:x-small;font-weight:normal;color:white;padding:3px }
+ td.ina     { background-color:#ff8c47;font-family:Helvetica,Arial,sans;font-size:small;font-weight:bold;padding:3px}
+ td.inc     { background-color:#c0d0f0;font-family:Helvetica,Arial,sans;font-size:small;font-style:italic;padding:3px }
+ td.inf     { background-color:#d0d0d0;font-family:Helvetica,Arial,sans;font-size:small;font-style:italic;padding:3px }
+ td.nob     { background-color:#e0e5df;font-family:Helvetica,Arial,sans;font-size:x-small;font-style:italic;padding:3px }
+ td.now     { background-color:#e0e5df;font-family:Helvetica,Arial,sans;font-size:x-small;font-style:italic;font-weight:bold;padding:3px;color:#f04000 }
+ td.nut     { background-color:#ffffff;font-family:Helvetica,Arial,sans;font-size:small;font-style:italic;padding:3px }
+ td.trn     { background-color:#d0ffd0;font-family:Helvetica,Arial,sans;font-size:small;font-style:italic;padding:3px;opacity:0.6;filter:alpha(opacity=60,style=0) }

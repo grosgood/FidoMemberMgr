@@ -1,0 +1,55 @@
+{% load breadcrumb_url breadcrumb from breadcrumbs %}
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <meta http-equiv="CONTENT-TYPE" content="text/html; charset=us-ascii">
+    <title>{% block title %}Fido Membership Matters{% endblock %}</title>
+    <link href="/sitemedia/membermanage.css" rel="stylesheet" type="text/css" media="screen" />
+    {% block scriptlist %}
+      {% for scripturl in scriptlist %}
+      <script type="text/javascript" language="javascript" src="{{scripturl}}"></script>
+      {% endfor %}
+    {% endblock %}
+  </head>
+  <body class="base">
+    <div style="position:absolute;left:0;top:0;z-index:0">
+      <img src="/sitemedia/banner.png" name="ciaobellabanner" align="left" width="1054" height="150" border="0" id="ciaobellabanner">
+    </div>
+    <div style="position:absolute;left:0;top:25;z-index:1">
+    <table cols="2" rules="None">
+      <colgroup>
+         <col width="410">
+         <col width="640">
+      </colgroup>
+      <tr>
+        <td class="bnr">
+          <img src="/sitemedia/fidologo.png" name="fidologo" align="left" width="165" height="90" border="0" id="fidologo">
+        </td>
+        <td class="bnr">
+           {% block pagetitle %}
+           <span class="title">Membership Matters</span>
+           {% endblock %}
+        </td> 
+      </tr>
+    </table>
+    </div>
+    <div style="position:absolute;left:0;top:170;z-index:1">
+       {% block breadcrumbtrail %}
+         {% if crumbline %}
+           <div class="crumbline"> 
+             {% for crumb in crumbline %}
+               {% if crumb.link %}
+                  {% breadcrumb crumb.label crumb.link %}
+               {% else %}
+                  {% breadcrumb crumb.label %}
+               {% endif %}
+             {% endfor %}
+           </div> 
+         {% endif %}
+       {% endblock %}
+       {% block content %}
+          {{content_text}}
+       {% endblock %}
+    </div>
+  </body>
+</html>

@@ -1,0 +1,96 @@
+{% extends "membermanage/base.html" %}
+{% load breadcrumb_url breadcrumb from breadcrumbs %}
+{% block pagetitle %}
+<span class="title">Pet Detail</span>
+{% endblock %}
+{% block content %}
+<table id="petdetail" title="Details About a Pet" cellspacing="1" cols="4" rules="NONE" border="0" summary="Detail of one pet." style="margin-left:50px">
+  <colgroup>
+    <col width=81 />
+    <col width=180 />
+    <col width=81 />
+    <col width=180 />
+  </colgroup>
+  <tbody>
+    <tr>
+      <td class="inc" colspan=2 style="font-size:large">
+        {{ identifier }}<br />
+        {{ name }}
+      </td>
+      <td class="nut" colspan=2>
+        {{ description }}
+      </td>
+    <tr>
+       <td class="nut" colspan=4>
+          {% for msg in messages %}
+          <p>{{ msg }}</p>
+          {% endfor %}
+       </td>
+    </tr>
+    {% if member %}
+    <tr>
+       <td class="inc">
+       <p>Location:</p>
+       </td>
+       <td class="nut" colspan=3>
+        {% if member.0.street %}
+           {{member.0.street.business}}<br />
+           {{member.0.street.location}}<br />
+           {{member.0.street.citystatezip}}<br />
+        {% else %}
+           (No U. S. Mail address)<br />
+        {% endif %}
+       </td>
+     </tr>
+    {% endif %} 
+    <tr><td class="nut" colspan=4><p style="text-align:center;font-weight:bold">FIDO Dog Tags:</p></td></tr>
+    {% if dogtags %}
+    <tr>
+       <td class="inc" colspan=2>
+          <p>Dogtags:</p> 
+       </td>
+       <td class="nut" colspan=2>
+          {% for dt in dogtags %} 
+          <p>{{ dt.number }}: {{ dt.status }}</p>
+          {% endfor %}
+       </td>
+       {% else %}
+       <td class="nut" colspan=4>
+         <p>{{ name }} has no assigned FIDO dog tags.</p>
+       </td>
+       {% endif %}
+    </tr> 
+    {% if member %}
+    <tr><td class="nut" colspan=4><p style="text-align:center;font-weight:bold">Fellow Humans:</p></td></tr>
+       {% for mbr in member %}
+    <tr>
+       <td class="inc" colspan=2>
+         <a href="{{ mbr.link }}">{{ mbr.fullname }}</a>
+       </td>
+       <td class="nut" >
+          <a href="mailto:{{mbr.email}}">{{ mbr.email }}</a>
+       </td>
+       <td class="nut">
+          {{ mbr.telephone }}
+       </td>
+    </tr>
+       {% endfor %}
+    {% endif %}
+    {% if copets %}
+    <tr><td class="nut" colspan=4><p style="text-align:center;font-weight:bold">Fellow Canines:</p></td></tr>
+       {% for cp in copets %}
+    <tr>
+       <td class="inc" colspan=2>
+         <a href="{{ cp.link }}">{{ cp.name }}</a>
+       </td>
+       <td class="nut" colspan=2>
+          {% for dt in cp.dogtags %} 
+          <p>{{ dt.number }}: {{ dt.status }}</p>
+          {% endfor %}
+       </td>
+    </tr>
+       {% endfor %}
+    {% endif %}     
+  </tbody>
+</table>
+{% endblock %}
