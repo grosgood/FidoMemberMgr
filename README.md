@@ -1,2 +1,3 @@
 # FidoMemberMgr
-The FIDO Membership Manager is a Python/Django, three-tier web application suitable for maintaining membership information. In addition to the typical member management tasks, there are specialized tasks for tracking members' canine companions.
+The [FIDO Membership Manager](http://fidobrooklynmembership.org) is a Python/Django, three-tier web application suitable for maintaining membership information for a small, Brooklyn NY non-profit that advocates offleash hours and places in the environs of Prospect Park, Brooklyn. In addition to the typical member management tasks, there are specialized tasks for tracking members' canine companions.
+The current production code base dates to June 2008 and currently operates on a LAMP stack where P=Python 2.7 and Django=1.4x; the first issue to be dealt with is to migrate the code base to current supported versions of the stack elements. See Issues for ongoing status on that effort.
